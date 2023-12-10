@@ -1,4 +1,6 @@
 // Moduler, ramverk och bibliotek
+
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -12,8 +14,9 @@ const htmlFilePath = path.join(__dirname, 'index.html');
 
 const PORT = 3024;
 
-//Länk till MongoDB Atlas-databasen
-const DATABASE_URI = 'mongodb+srv://admin:123456admin@hannahapi.qnuesyy.mongodb.net/hannahtestar?retryWrites=true&w=majority';
+// //Länk till .env-filen där databaslösenet står
+// mongoose.connect(process.env.DATABASE_URI);
+
 
 // Express Middlewares
 app.use(express.static(__dirname));
@@ -21,7 +24,7 @@ app.use(express.json());
 
 // Funktion för att ansluta till MongoDB-Atlas-databasen
 async function main() {
-  await mongoose.connect(DATABASE_URI);
+  await mongoose.connect(process.env.DATABASE_URI);
 }
 
 // Anropar main-funktionen för att kunna ansluta till cloud-databasen
